@@ -12,6 +12,7 @@ public class EnemyAI : MonoBehaviour
 
     NavMeshAgent navMeshAgent;
     Animator animator;
+    EnemyHealth enemyHealth;
 
     float currentDistance = Mathf.Infinity;
     bool isProvoked = false;
@@ -20,10 +21,16 @@ public class EnemyAI : MonoBehaviour
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        enemyHealth = GetComponent<EnemyHealth>();
     }
 
     void Update()
     {
+        if (enemyHealth.IsDead())
+        {
+            enabled = false;
+            navMeshAgent.enabled = false;
+        }
         currentDistance = Vector3.Distance(target.position, transform.position);
 
         if (isProvoked)
@@ -34,6 +41,11 @@ public class EnemyAI : MonoBehaviour
         {
             isProvoked = true;
         }
+    }
+
+    public void OnDamageTaken()
+    {
+        isProvoked = true;
     }
 
     void EngageTarget()

@@ -7,6 +7,13 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] float maxHitPoints = 100f;
 
+    DeathHandler deathHandler;
+
+    void Awake()
+    {
+        deathHandler = GetComponent<DeathHandler>();
+    }
+
     public void TakeDamage(float damage)
     {
         maxHitPoints -= damage;
@@ -18,6 +25,6 @@ public class PlayerHealth : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("You died..");
+        deathHandler.HandleDeath();
     }
 }

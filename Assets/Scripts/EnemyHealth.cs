@@ -7,8 +7,19 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] float maxHitPoints = 100f;
 
+    Animator animator;
+
+    bool isDead = false;
+    public bool IsDead() { return isDead; }
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     public void TakeDamage(float amount)
     {
+        BroadcastMessage("OnDamageTaken");
         maxHitPoints -= amount;
         if (maxHitPoints <= 0)
         {
@@ -18,8 +29,9 @@ public class EnemyHealth : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject);
+        if (isDead) return;
+        isDead = true;
+        animator.SetTrigger("Die");
+        Destroy(gameObject, 2.66f);
     }
-
-
 }
