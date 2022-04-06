@@ -16,6 +16,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        deathHandler.GetBloodyScreen();
         maxHitPoints -= damage;
         if (maxHitPoints < 0)
         {

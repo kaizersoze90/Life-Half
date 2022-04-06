@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Weapon : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] GameObject hitImpact;
     [SerializeField] Ammo ammoSlot;
     [SerializeField] AmmoType ammoType;
+    [SerializeField] TextMeshProUGUI ammoText;
     [SerializeField] float range = 100f;
     [SerializeField] float weaponDamage = 20f;
     [SerializeField] float fireRate = 0.5f;
@@ -23,6 +25,8 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
+        DisplayAmmo();
+
         if (Input.GetButton("Fire1") && canShoot)
         {
             StartCoroutine(Shoot());
@@ -40,6 +44,11 @@ public class Weapon : MonoBehaviour
         }
         yield return new WaitForSeconds(fireRate);
         canShoot = true;
+    }
+
+    void DisplayAmmo()
+    {
+        ammoText.text = ammoSlot.GetCurrentAmmo(ammoType).ToString("0000");
     }
 
     void PlayMuzzleFlash()

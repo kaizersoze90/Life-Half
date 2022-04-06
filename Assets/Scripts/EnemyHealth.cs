@@ -32,6 +32,6 @@ public class EnemyHealth : MonoBehaviour
         if (isDead) return;
         isDead = true;
         animator.SetTrigger("Die");
-        Destroy(gameObject, 2.66f);
+        Destroy(gameObject, 2.3f);
     }
 }

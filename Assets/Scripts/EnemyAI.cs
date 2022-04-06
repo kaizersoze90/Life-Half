@@ -65,7 +65,7 @@ public class EnemyAI : MonoBehaviour
 
     void AttackTarget(bool state)
     {
-        animator.SetBool("isAttacking", state);
+        animator.SetBool("Stab Attack", state);
     }
 
     void ChaseTarget()
